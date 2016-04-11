@@ -22,10 +22,29 @@ public class Main extends Application {
     private double x = 5;
     private double y = 5;
 
+    private Shape circle;
+    private EventHandler<KeyEvent> keyboardListener = event -> {
+
+        switch (event.getCode()) {
+            case UP:
+                circle.moveUp();
+                break;
+            case DOWN:
+                circle.moveDown();
+                break;
+            case RIGHT:
+                circle.moveRight();
+                break;
+            case LEFT:
+                circle.moveLeft();
+
+        }
+    };
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Hello world");
+        primaryStage.setTitle("-=Shapes=-");
         BorderPane group = new BorderPane();
         Canvas canvas = new Canvas(CANVAS_X, CANVAS_Y);
         scene = new Scene(group);
@@ -34,32 +53,16 @@ public class Main extends Application {
         group.setCenter(canvas);
         primaryStage.show();
 
-        Circle circle = new Circle(gc);
+        circle = new Circle(gc);
         circle.draw();
-
-        EventHandler<KeyEvent> keybordListener = event -> {
-
-            switch (event.getCode()) {
-                case UP:
-                    circle.moveUp();
-                    break;
-                case DOWN:
-                    circle.moveDown();
-                    break;
-                case RIGHT:
-                    circle.moveRight();
-                    break;
-                case LEFT:
-                    circle.moveLeft();
-                    break;
-            }
-        };
+        setOnKeyPressed();
 
 
     }
-private void setOnKeyPressed(Key)
 
-
+    public void setOnKeyPressed() {
+        scene.setOnKeyPressed(keyboardListener);
+    }
 
 
     public static void main(String[] args) {

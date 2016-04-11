@@ -11,13 +11,10 @@ public class Circle extends Shape {
 
     public Circle(GraphicsContext gc) {
         super(gc);
-
-
     }
-
-    public void draw() {
+@Override
+public void draw() {
         getGc().setFill(Color.GREENYELLOW);
-        getGc().fillOval(getGc().getCanvas().getWidth() / 2 - size / 2, getGc().getCanvas().getHeight() / 2 - size / 2, size, size);
-
+        getGc().fillOval(getX(), getY(), size, size);
     }
 }
