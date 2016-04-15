@@ -1,22 +1,24 @@
 package sample;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
+
+import java.util.Random;
 
 /**
  * Created by Inna on 10.04.2016.
  */
 public abstract class Shape {
     private GraphicsContext gc;
+    Random random = new Random();
     private static int size = 50;
-    protected int x;
-    protected int y;
-    protected int step = 5;
+    private double x;
+    private double y;
+    private int step = 5;
 
     public Shape(GraphicsContext gc) {
         this.gc = gc;
-        x = (int) (getGc().getCanvas().getWidth() / 2 - size / 2);
-        y = (int) getGc().getCanvas().getHeight() / 2 - size / 2;
+        x = random.nextInt((int) (getGc().getCanvas().getWidth()));
+        y = random.nextInt((int) getGc().getCanvas().getHeight());
 
     }
 
@@ -27,28 +29,37 @@ public abstract class Shape {
 
 
     public void moveUp() {
-        clear();
-        y -= step;
-        draw();
+        if (y > 0) {
+            clear();
+            y -= step;
+            draw();
+        }
     }
 
 
     public void moveDown() {
-        clear();
-        y += step;
-        draw();
+        if (y < gc.getCanvas().getHeight() - size) {
+            clear();
+            y += step;
+            draw();
+        }
+
     }
 
     public void moveRight() {
-        clear();
-        x += step;
-        draw();
+        if (x < gc.getCanvas().getWidth() - size) {
+            clear();
+            x += step;
+            draw();
+        }
     }
 
     public void moveLeft() {
-        clear();
-        x -= step;
-        draw();
+        if (x > 0) {
+            clear();
+            x -= step;
+            draw();
+        }
     }
 
 
@@ -58,11 +69,23 @@ public abstract class Shape {
 
     public abstract void draw();
 
-    public int getX() {
+    public double getX() {
+        if (x <= 0) {
+            return x = 3;
+        }
+        if (x >= getGc().getCanvas().getWidth()) {
+            return x = ((getGc().getCanvas().getWidth() - 100));
+        }
         return x;
     }
 
-    public int getY() {
+    public double getY() {
+        if (y <= 0) {
+            return y = 3;
+        }
+        if (y >= getGc().getCanvas().getHeight()) {
+            return y = ((getGc().getCanvas().getHeight() - 100));
+        }
         return y;
     }
 

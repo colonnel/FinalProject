@@ -8,36 +8,89 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
 
 public class Main extends Application {
     private static int CANVAS_X = 1000;
     private static int CANVAS_Y = 600;
     GraphicsContext gc;
     Scene scene;
-    private int size = 50;
-    private double x = 5;
-    private double y = 5;
+    ArrayList<Shape> list = new ArrayList<>();
+    private int counter = 0;
 
-    private Shape circle;
+
     private EventHandler<KeyEvent> keyboardListener = event -> {
+
+        //Add circle
+        if (event.getCode() == KeyCode.DIGIT1) {
+            list.add(new Circle(gc));
+            list.get(list.size() - 1).clear();
+            for (int i = 0; i < list.size(); i++) {
+                list.get(i).draw();
+            }
+            counter++;
+        }
+
+        //Add square
+        if (event.getCode() == KeyCode.DIGIT2) {
+            list.add(new Square(gc));
+            list.get(list.size() - 1).clear();
+            for (int i = 0; i < list.size(); i++) {
+                list.get(i).draw();
+            }
+            counter++;
+        }
+
+        //Add Triangle
+        if (event.getCode() == KeyCode.DIGIT3) {
+            list.add(new Triangle(gc));
+            list.get(list.size() - 1).clear();
+            for (int i = 0; i < list.size(); i++) {
+                list.get(i).draw();
+            }
+            counter++;
+        }
+
+        //Switch forward between shapes and shapes group
+        if (event.getCode() == KeyCode.A) {
+            counter--;
+            if (counter < 0) {
+                counter = 0;
+            }
+
+        }
+        //Switch backward between shapes and shapes group
+        if (event.getCode() == KeyCode.D) {
+            counter++;
+            if (counter > list.size() - 1) {
+                counter = list.size() - 1;
+            }
+        }
+
 
         switch (event.getCode()) {
             case UP:
-                circle.moveUp();
+                list.get(counter).moveUp();
                 break;
             case DOWN:
-                circle.moveDown();
+                list.get(counter).moveDown();
                 break;
             case RIGHT:
-                circle.moveRight();
+                list.get(counter).moveRight();
                 break;
             case LEFT:
-                circle.moveLeft();
-
+                list.get(counter).moveLeft();
+                break;
+        }
+        list.get(list.size() - 1).clear();
+        for (int i = 0; i < list.size(); i++) {
+            list.get(i).draw();
         }
     };
 
@@ -52,9 +105,6 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         group.setCenter(canvas);
         primaryStage.show();
-
-        circle = new Circle(gc);
-        circle.draw();
         setOnKeyPressed();
 
 
