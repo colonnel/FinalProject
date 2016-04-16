@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Main extends Application {
     private static int CANVAS_X = 1000;
@@ -72,20 +73,54 @@ public class Main extends Application {
                 counter = list.size() - 1;
             }
         }
+        //Random add shapes
+        if (event.getCode() == KeyCode.SPACE) {
+            Random rand = new Random();
+            int randShape = rand.nextInt(3) + 1;
+            if (randShape==1){
+                list.add(new Circle(gc));
+                list.get(list.size() - 1).clear();
+                for (int i = 0; i < list.size(); i++) {
+                    list.get(i).draw();
+                }
+                counter++;
+            }
+            if (randShape==2){
+                list.add(new Square(gc));
+                list.get(list.size() - 1).clear();
+                for (int i = 0; i < list.size(); i++) {
+                    list.get(i).draw();
+                }
+                counter++;
+            }
+            if (randShape==3){
+                list.add(new Triangle(gc));
+                list.get(list.size() - 1).clear();
+                for (int i = 0; i < list.size(); i++) {
+                    list.get(i).draw();
+                }
+                counter++;
+            }
+
+        }
+        //Clear canvas
+        if (event.getCode() == KeyCode.C) {
+
+        }
 
 
         switch (event.getCode()) {
             case UP:
-                list.get(counter).moveUp();
+                list.get(counter - 1).moveUp();
                 break;
             case DOWN:
-                list.get(counter).moveDown();
+                list.get(counter - 1).moveDown();
                 break;
             case RIGHT:
-                list.get(counter).moveRight();
+                list.get(counter - 1).moveRight();
                 break;
             case LEFT:
-                list.get(counter).moveLeft();
+                list.get(counter - 1).moveLeft();
                 break;
         }
         list.get(list.size() - 1).clear();

@@ -71,20 +71,20 @@ public abstract class Shape {
 
     public double getX() {
         if (x <= 0) {
-            return x = 3;
+            return 3;
         }
         if (x >= getGc().getCanvas().getWidth()) {
-            return x = ((getGc().getCanvas().getWidth() - 100));
+            return ((getGc().getCanvas().getWidth() - size));
         }
         return x;
     }
 
     public double getY() {
         if (y <= 0) {
-            return y = 3;
+            return 3;
         }
         if (y >= getGc().getCanvas().getHeight()) {
-            return y = ((getGc().getCanvas().getHeight() - 100));
+            return ((getGc().getCanvas().getHeight() - size));
         }
         return y;
     }
