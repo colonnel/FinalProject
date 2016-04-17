@@ -1,16 +1,22 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -58,6 +64,26 @@ public class Main extends Application {
             counter++;
         }
 
+        //Add oval
+        if (event.getCode() == KeyCode.DIGIT4) {
+            list.add(new Oval(gc));
+            list.get(list.size() - 1).clear();
+            for (int i = 0; i < list.size(); i++) {
+                list.get(i).draw();
+            }
+            counter++;
+        }
+
+        //Add rectangle
+        if (event.getCode() == KeyCode.DIGIT5) {
+            list.add(new Rectangle(gc));
+            list.get(list.size() - 1).clear();
+            for (int i = 0; i < list.size(); i++) {
+                list.get(i).draw();
+            }
+            counter++;
+        }
+
         //Switch forward between shapes and shapes group
         if (event.getCode() == KeyCode.A) {
             counter--;
@@ -74,39 +100,54 @@ public class Main extends Application {
             }
         }
         //Random add shapes
-        if (event.getCode() == KeyCode.SPACE) {
-            Random rand = new Random();
-            int randShape = rand.nextInt(3) + 1;
-            if (randShape==1){
-                list.add(new Circle(gc));
-                list.get(list.size() - 1).clear();
-                for (int i = 0; i < list.size(); i++) {
-                    list.get(i).draw();
-                }
-                counter++;
-            }
-            if (randShape==2){
-                list.add(new Square(gc));
-                list.get(list.size() - 1).clear();
-                for (int i = 0; i < list.size(); i++) {
-                    list.get(i).draw();
-                }
-                counter++;
-            }
-            if (randShape==3){
-                list.add(new Triangle(gc));
-                list.get(list.size() - 1).clear();
-                for (int i = 0; i < list.size(); i++) {
-                    list.get(i).draw();
-                }
-                counter++;
+        if (event.getCode() == KeyCode.DIGIT6) {
+             int randShape = new Random().nextInt(5) + 1;
+            switch (randShape) {
+                case 1:
+                    list.add(new Circle(gc));
+                    list.get(list.size() - 1).clear();
+                    for (int i = 0; i < list.size(); i++) {
+                        list.get(i).draw();
+                    }
+                    counter++;
+                    break;
+                case 2:
+                    list.add(new Square(gc));
+                    list.get(list.size() - 1).clear();
+                    for (int i = 0; i < list.size(); i++) {
+                        list.get(i).draw();
+                    }
+                    counter++;
+                    break;
+                case 3:
+                    list.add(new Triangle(gc));
+                    list.get(list.size() - 1).clear();
+                    for (int i = 0; i < list.size(); i++) {
+                        list.get(i).draw();
+                    }
+                    counter++;
+                    break;
+                case 4:
+                    list.add(new Oval(gc));
+                    list.get(list.size() - 1).clear();
+                    for (int i = 0; i < list.size(); i++) {
+                        list.get(i).draw();
+                    }
+                    counter++;
+                    break;
+                case 5:
+                    list.add(new Rectangle(gc));
+                    list.get(list.size() - 1).clear();
+                    for (int i = 0; i < list.size(); i++) {
+                        list.get(i).draw();
+                    }
+                    counter++;
+                    break;
             }
 
         }
-        //Clear canvas
-        if (event.getCode() == KeyCode.C) {
 
-        }
+
 
 
         switch (event.getCode()) {
@@ -127,6 +168,18 @@ public class Main extends Application {
         for (int i = 0; i < list.size(); i++) {
             list.get(i).draw();
         }
+
+        //Help
+        if (event.getCode()==KeyCode.H){
+
+        }
+
+        //Clear canvas
+        if (event.getCode() == KeyCode.C) {
+            list.clear();
+            gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
+
+        }
     };
 
 
@@ -135,14 +188,40 @@ public class Main extends Application {
         primaryStage.setTitle("-=Shapes=-");
         BorderPane group = new BorderPane();
         Canvas canvas = new Canvas(CANVAS_X, CANVAS_Y);
-        scene = new Scene(group);
+        GridPane grid = createGrid();
+        addButton(grid);
+        grid.add(group,1,1);
+        scene = new Scene(grid);
+        //scene = new Scene(group);
         gc = canvas.getGraphicsContext2D();
         primaryStage.setScene(scene);
         group.setCenter(canvas);
         primaryStage.show();
         setOnKeyPressed();
 
+    }
 
+    private void addButton(GridPane grid) {
+        Button btn = new Button("Sign in");
+        HBox hbBtn = new HBox(10);
+        hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
+        hbBtn.getChildren().add(btn);
+        grid.add(hbBtn, 1, 4);
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Event -->" + event.toString());
+            }
+        });
+    }
+
+    private GridPane createGrid() {
+        GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(25, 25, 25, 25));
+        return grid;
     }
 
     public void setOnKeyPressed() {

@@ -71,7 +71,7 @@ public abstract class Shape {
 
     public double getX() {
         if (x <= 0) {
-            return 3;
+            return size/2;
         }
         if (x >= getGc().getCanvas().getWidth()) {
             return ((getGc().getCanvas().getWidth() - size));

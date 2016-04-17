@@ -17,7 +17,7 @@ public class Rectangle extends Shape {
 
     @Override
     public void draw() {
-        getGc().setFill(Color.BEIGE);
+        getGc().setFill(Color.TOMATO);
         getGc().fillRect(getX(), getY(), width, high);
     }
 }
