@@ -18,6 +18,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -100,8 +101,8 @@ public class Main extends Application {
             }
         }
         //Random add shapes
-        if (event.getCode() == KeyCode.DIGIT6) {
-             int randShape = new Random().nextInt(5) + 1;
+        if (event.getCode() == KeyCode.R) {
+            int randShape = new Random().nextInt(5) + 1;
             switch (randShape) {
                 case 1:
                     list.add(new Circle(gc));
@@ -148,8 +149,6 @@ public class Main extends Application {
         }
 
 
-
-
         switch (event.getCode()) {
             case UP:
                 list.get(counter - 1).moveUp();
@@ -170,7 +169,7 @@ public class Main extends Application {
         }
 
         //Help
-        if (event.getCode()==KeyCode.H){
+        if (event.getCode() == KeyCode.H) {
 
         }
 
@@ -190,7 +189,7 @@ public class Main extends Application {
         Canvas canvas = new Canvas(CANVAS_X, CANVAS_Y);
         GridPane grid = createGrid();
         addButton(grid);
-        grid.add(group,1,1);
+        grid.add(group, 1, 1);
         scene = new Scene(grid);
         //scene = new Scene(group);
         gc = canvas.getGraphicsContext2D();
@@ -202,17 +201,32 @@ public class Main extends Application {
     }
 
     private void addButton(GridPane grid) {
-        Button btn = new Button("Sign in");
+        Button buttonClearCanvas = new Button("Clear canvas");
+        Button buttonHelp = new Button("Help");
         HBox hbBtn = new HBox(10);
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
-        hbBtn.getChildren().add(btn);
+        hbBtn.getChildren().add(buttonClearCanvas);
+        hbBtn.getChildren().add(buttonHelp);
         grid.add(hbBtn, 1, 4);
-        btn.setOnAction(new EventHandler<ActionEvent>() {
+
+        buttonClearCanvas.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Event -->" + event.toString());
+                list.clear();
+                gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
             }
         });
+
+        buttonHelp.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Event -->" + event.toString());
+                HelpFrame help =new HelpFrame();
+            }
+        });
+
+
     }
 
     private GridPane createGrid() {
@@ -220,7 +234,7 @@ public class Main extends Application {
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
         grid.setVgap(10);
-        grid.setPadding(new Insets(25, 25, 25, 25));
+        grid.setPadding(new Insets(15, 15, 15, 15));
         return grid;
     }
 
