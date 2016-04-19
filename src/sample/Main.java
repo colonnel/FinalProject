@@ -170,7 +170,7 @@ public class Main extends Application {
 
         //Help
         if (event.getCode() == KeyCode.H) {
-
+            HelpFrame help = new HelpFrame();
         }
 
         //Clear canvas
@@ -222,7 +222,7 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Event -->" + event.toString());
-                HelpFrame help =new HelpFrame();
+                HelpFrame help = new HelpFrame();
             }
         });
 
