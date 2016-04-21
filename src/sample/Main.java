@@ -21,6 +21,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -169,8 +173,8 @@ public class Main extends Application {
         }
 
         //Help
-        if (event.getCode() == KeyCode.H) {
-            HelpFrame help = new HelpFrame();
+        if (event.getCode() == KeyCode.F1) {
+            Help help = new Help();
         }
 
         //Clear canvas
@@ -201,8 +205,8 @@ public class Main extends Application {
     }
 
     private void addButton(GridPane grid) {
-        Button buttonClearCanvas = new Button("Clear canvas");
-        Button buttonHelp = new Button("Help");
+        Button buttonClearCanvas = new Button("Clear canvas (C)");
+        Button buttonHelp = new Button("Help (F1)");
         HBox hbBtn = new HBox(10);
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
         hbBtn.getChildren().add(buttonClearCanvas);
@@ -222,7 +226,9 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Event -->" + event.toString());
-                HelpFrame help = new HelpFrame();
+                Help help = new Help();
+//                HelpFrame helpFrame= new HelpFrame();
+
             }
         });
 
