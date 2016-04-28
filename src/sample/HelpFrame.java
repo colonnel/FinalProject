@@ -16,10 +16,13 @@ import java.net.URISyntaxException;
 public class HelpFrame extends JFrame {
 
     public HelpFrame() {
-        JButton closeButton = new JButton("Close");
+
         setTitle("Help file");
         setLayout(new FlowLayout());
-        JLabel label = new JLabel("<h4>For add a shape on canvas press on keyboard:</h4>\n" +
+        JLabel label = new JLabel();
+        label.getVerticalAlignment();
+        label.getHorizontalAlignment();
+        label.setText("<html><h4>For add a shape on canvas press on keyboard:</h4>\n" +
                 "<p>\"1\" - circle\n" +
                 "<br>\"2\" - square\n" +
                 "<br>\"3\" - triangle\n" +
@@ -32,32 +35,15 @@ public class HelpFrame extends JFrame {
                 "<br>\"D\" - next shape\n" +
                 "<br>If You want to clear canvas - click on\n" +
                 "<br>\"Clear canvas\" button or press \"C\" on keyboard.</p>\n" +
-                "<h4>Have a nice day!</h4>");
+                "<h4>Have a nice day!</h4></html>");
         add(label, BorderLayout.SOUTH);
-//        closeButton.addActionListener((ActionListener) this);
-        setSize(300, 600);
+        setSize(400, 400);
         setVisible(true);
-        add(closeButton);
-        JTextArea helpFile = new JTextArea();
-        helpFile.setEditable(false);
-        JScrollPane scroll=new JScrollPane();
-        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        helpFile.append("<h4>For add a shape on canvas press on keyboard:</h4>\n" +
-                "<p>\"1\" - circle\n" +
-                "<br>\"2\" - square\n" +
-                "<br>\"3\" - triangle\n" +
-                "<br>\"4\" - rectangle\n" +
-                "<br>\"5\" - oval\n" +
-                "<br>\"R\" - random shape</p>\n" +
-                "<h4>You may to move last shape with arrow keys on keyboard:</h4>\n" +
-                "<p>For switching between shapes use:\n" +
-                "<br>\"A\" - previous shape\n" +
-                "<br>\"D\" - next shape\n" +
-                "<br>If You want to clear canvas - click on\n" +
-                "<br>\"Clear canvas\" button or press \"C\" on keyboard.</p>\n" +
-                "<h4>Have a nice day!</h4>");
+        JButton closeButton = new JButton("Close");
+       // closeButton.addActionListener(new ButtonActionListener
 
+       // );
+        add(closeButton);
 
 
     }
