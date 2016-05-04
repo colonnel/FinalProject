@@ -14,6 +14,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -21,6 +22,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -169,8 +174,8 @@ public class Main extends Application {
         }
 
         //Help
-        if (event.getCode() == KeyCode.H) {
-            HelpFrame help = new HelpFrame();
+        if (event.getCode() == KeyCode.F1) {
+            Help help = new Help();
         }
 
         //Clear canvas
@@ -201,8 +206,8 @@ public class Main extends Application {
     }
 
     private void addButton(GridPane grid) {
-        Button buttonClearCanvas = new Button("Clear canvas");
-        Button buttonHelp = new Button("Help");
+        Button buttonClearCanvas = new Button("Clear canvas (C)");
+        Button buttonHelp = new Button("Help (F1)");
         HBox hbBtn = new HBox(10);
         hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
         hbBtn.getChildren().add(buttonClearCanvas);
@@ -222,7 +227,9 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Event -->" + event.toString());
-                HelpFrame help = new HelpFrame();
+//                Help help = new Help();
+                HelpFrame helpFrame= new HelpFrame();
+
             }
         });
 
@@ -237,6 +244,34 @@ public class Main extends Application {
         grid.setPadding(new Insets(15, 15, 15, 15));
         return grid;
     }
+
+//    private void setOnMousePressed() {
+//        scene.setOnMousePressed(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent event) {
+//                Group group1 = new Group(gc);
+//                double clickX = event.getSceneX();
+//                double clickY = event.getSceneY();
+//                for (int i = 0; i < list.size(); i++) {
+//                    if (list.get(i).isTouched(clickX, clickY)) {
+//
+//                        Shape current = list.get(counter-1);
+//                        Shape selected = list.get(i);
+//                        if (current == selected) {
+//                            return;
+//                        }
+//                        group1.addToGroup(current);
+//                        group1.addToGroup(selected);
+//                        group1.draw();
+//                        list.remove(current);
+//                        list.remove(selected);
+//                    }
+//                }
+//                list.add(group1);
+//                counter = list.size() - 1;
+//            }
+//        });
+//    }
 
     public void setOnKeyPressed() {
         scene.setOnKeyPressed(keyboardListener);
