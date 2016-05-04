@@ -3,17 +3,11 @@ package sample;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.text.Font;
 
+import javax.swing.*;
+
 /**
  * Created by Inna on 17.04.2016.
  */
-public class Help extends Shape {
+public class Help extends JFrame {
 
-    public Help(GraphicsContext gc) {
-        super(gc);
-    }
-
-    @Override
-    public void draw() {
-
-    }
 }

@@ -19,7 +19,6 @@ public class HelpFrame extends JFrame {
         //closeButton.addActionListener((ActionListener) this);
         setSize(300, 600);
         setVisible(true);
-
     }
 
 }
