@@ -20,4 +20,14 @@ public class Rectangle extends Shape {
         getGc().setFill(Color.TOMATO);
         getGc().fillRect(getX(), getY(), width, high);
     }
+
+    @Override
+    public void changeColor(Color color) {
+
+    }
+
+    @Override
+    public boolean isTouched(double clickX, double clickY) {
+        return false;
+    }
 }

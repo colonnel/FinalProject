@@ -20,4 +20,14 @@ public class Triangle extends Shape {
         getGc().fillPolygon(new double[]{getX(), getX()+size, getX()+size/2},
         new double[]{getY()+size, getY()+size, getY()},3);
     }
+
+    @Override
+    public void changeColor(Color color) {
+
+    }
+
+    @Override
+    public boolean isTouched(double clickX, double clickY) {
+        return false;
+    }
 }

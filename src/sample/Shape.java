@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 import java.util.Random;
 
@@ -74,7 +75,7 @@ public abstract class Shape {
             return size / 2;
         }
         if (x >= getGc().getCanvas().getWidth()) {
-            return (getGc().getCanvas().getWidth() - size*2);
+            return (getGc().getCanvas().getWidth() - size * 2);
         }
         return x;
     }
@@ -84,10 +85,14 @@ public abstract class Shape {
             return size / 2;
         }
         if (y >= getGc().getCanvas().getHeight()) {
-            return (getGc().getCanvas().getHeight() - size*2);
+            return (getGc().getCanvas().getHeight() - size * 2);
         }
         return y;
     }
+
+    public abstract void changeColor(Color color);
+
+    public abstract boolean isTouched(double clickX, double clickY);
 
 
 }

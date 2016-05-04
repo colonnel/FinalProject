@@ -7,8 +7,8 @@ import javafx.scene.paint.Color;
  * Created by Admin on 16.04.16.
  */
 public class Oval extends Shape {
-    private int width=30;
-    private int high=50;
+    private int width = 30;
+    private int high = 50;
 
     public Oval(GraphicsContext gc) {
         super(gc);
@@ -17,6 +17,20 @@ public class Oval extends Shape {
     @Override
     public void draw() {
         getGc().setFill(Color.DARKBLUE);
-        getGc().fillOval(getX(),getY(),width,high);
+        getGc().fillOval(getX(), getY(), width, high);
+    }
+
+    @Override
+    public void changeColor(Color color) {
+        getGc().setFill(color);
+        getGc().fillOval(getX(), getY(), width, high);
+    }
+
+    @Override
+    public boolean isTouched(double clickX, double clickY) {
+        if ((clickX <= getX() + width) && (clickX >= getX()) && (clickY <= getY() + high) && (clickY >= getY())){
+            return true;
+        }
+        return false;
     }
 }

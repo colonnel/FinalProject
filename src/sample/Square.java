@@ -20,4 +20,14 @@ public class Square extends Shape {
         getGc().setFill(Color.BLUE);
         getGc().fillRect(getX(),getY(),size,size);
     }
+
+    @Override
+    public void changeColor(Color color) {
+
+    }
+
+    @Override
+    public boolean isTouched(double clickX, double clickY) {
+        return false;
+    }
 }

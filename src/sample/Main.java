@@ -228,7 +228,7 @@ public class Main extends Application {
             public void handle(ActionEvent event) {
                 System.out.println("Event -->" + event.toString());
 //                Help help = new Help();
-                HelpFrame helpFrame= new HelpFrame();
+                HelpFrame helpFrame = new HelpFrame();
 
             }
         });
@@ -243,6 +243,34 @@ public class Main extends Application {
         grid.setVgap(10);
         grid.setPadding(new Insets(15, 15, 15, 15));
         return grid;
+    }
+
+    private void setOnMousePressed() {
+        scene.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Group group1 = new Group(gc);
+                double clickX = event.getSceneX();
+                double clickY = event.getSceneY();
+                for (int i = 0; i <list.size() ; i++) {
+                    if (list.get(i).isTouched(clickX, clickY)){
+                        Shape current = list.get(counter-1);
+                        Shape selected = list.get(i);
+                        if (current == selected){
+                            return;
+                        }
+                        group1.addToGroup(current);
+                        group1.addToGroup(selected);
+                        group1.draw();
+                        list.remove(current);
+                        list.remove(selected);
+                    }
+                }
+                list.add(group1);
+                counter = list.size() -1;
+
+            }
+        });
     }
 
 //    private void setOnMousePressed() {

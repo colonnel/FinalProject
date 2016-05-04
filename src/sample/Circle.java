@@ -17,4 +17,14 @@ public void draw() {
         getGc().setFill(Color.GREENYELLOW);
         getGc().fillOval(getX(), getY(), size, size);
     }
+
+    @Override
+    public void changeColor(Color color) {
+
+    }
+
+    @Override
+    public boolean isTouched(double clickX, double clickY) {
+        return false;
+    }
 }
