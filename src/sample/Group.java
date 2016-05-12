@@ -7,12 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by Admin on 04.05.16.
- */
+
 public class Group extends Shape {
     List<Shape> list = new ArrayList<>();
     private Color colorForGroup;
+
     public Group(GraphicsContext gc) {
         super(gc);
         colorForGroup = generateColorForGroup();
@@ -20,43 +19,41 @@ public class Group extends Shape {
 
     @Override
     public void draw() {
-        for (Shape s:
-             list) {
+        for (Shape s : list) {
             s.changeColor(colorForGroup);
         }
     }
 
     @Override
     public void changeColor(Color color) {
-
+        //not need
     }
 
-    public void moveUp(){
-        for (Shape s:
-             list) {
+    public void moveUp() {
+        for (Shape s : list) {
             s.moveUp();
         }
     }
-    public void moveDown(){
-        for (Shape s:
-                list) {
+
+    public void moveDown() {
+        for (Shape s : list) {
             s.moveDown();
         }
     }
-    public void moveLeft(){
-        for (Shape s:
-                list) {
+
+    public void moveLeft() {
+        for (Shape s : list) {
             s.moveLeft();
         }
     }
-    public void moveRight(){
-        for (Shape s:
-                list) {
+
+    public void moveRight() {
+        for (Shape s : list) {
             s.moveRight();
         }
     }
 
-    public void addToGroup(Shape shape){
+    public void addToGroup(Shape shape) {
         list.add(shape);
     }
 
@@ -74,5 +71,9 @@ public class Group extends Shape {
         Color randomColorForGroup = new Color(r, g, b, 1);
         return randomColorForGroup;
 
+    }
+
+    public boolean isExsist(Shape s) {
+        return list.contains(s);
     }
 }

@@ -3,9 +3,7 @@ package sample;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-/**
- * Created by Admin on 16.04.16.
- */
+
 public class Oval extends Shape {
     private int width = 30;
     private int high = 50;
@@ -29,6 +27,8 @@ public class Oval extends Shape {
     @Override
     public boolean isTouched(double clickX, double clickY) {
         if ((clickX <= getX() + width) && (clickX >= getX()) && (clickY <= getY() + high) && (clickY >= getY())){
+            System.out.println("x: " + getX());
+            System.out.println("y: " + getY());
             return true;
         }
         return false;

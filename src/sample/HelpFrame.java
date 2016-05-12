@@ -40,9 +40,7 @@ public class HelpFrame extends JFrame {
         setSize(400, 400);
         setVisible(true);
         JButton closeButton = new JButton("Close");
-       // closeButton.addActionListener(new ButtonActionListener
 
-       // );
         add(closeButton);
 
 

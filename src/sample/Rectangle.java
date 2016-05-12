@@ -3,9 +3,7 @@ package sample;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-/**
- * Created by Admin on 16.04.16.
- */
+
 public class Rectangle extends Shape {
     private int width = 50;
     private int high = 75;
@@ -23,11 +21,17 @@ public class Rectangle extends Shape {
 
     @Override
     public void changeColor(Color color) {
-
+        getGc().setFill(color);
+        getGc().fillRect(getX(), getY(), width, high);
     }
 
     @Override
     public boolean isTouched(double clickX, double clickY) {
+        if ((clickX <= getX() + width) && (clickX >= getX()) && (clickY <= getY() + high) && (clickY >= getY())){
+            System.out.println("x: " + getX());
+            System.out.println("y: " + getY());
+            return true;
+        }
         return false;
     }
 }

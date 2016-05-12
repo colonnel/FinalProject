@@ -5,9 +5,7 @@ import javafx.scene.paint.Color;
 
 import java.util.Random;
 
-/**
- * Created by Inna on 10.04.2016.
- */
+
 public abstract class Shape {
     private GraphicsContext gc;
     Random random = new Random();
@@ -31,35 +29,26 @@ public abstract class Shape {
 
     public void moveUp() {
         if (y > 0) {
-            clear();
             y -= step;
-            draw();
         }
     }
 
 
     public void moveDown() {
         if (y < gc.getCanvas().getHeight() - size) {
-            clear();
             y += step;
-            draw();
         }
-
     }
 
     public void moveRight() {
         if (x < gc.getCanvas().getWidth() - size) {
-            clear();
             x += step;
-            draw();
         }
     }
 
     public void moveLeft() {
         if (x > 0) {
-            clear();
             x -= step;
-            draw();
         }
     }
 
@@ -72,7 +61,7 @@ public abstract class Shape {
 
     public double getX() {
         if (x <= 0) {
-            return size / 2;
+            return (size / 2);
         }
         if (x >= getGc().getCanvas().getWidth()) {
             return (getGc().getCanvas().getWidth() - size * 2);
@@ -82,7 +71,7 @@ public abstract class Shape {
 
     public double getY() {
         if (y <= 0) {
-            return size / 2;
+            return (size / 2);
         }
         if (y >= getGc().getCanvas().getHeight()) {
             return (getGc().getCanvas().getHeight() - size * 2);

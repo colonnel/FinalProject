@@ -1,17 +1,11 @@
 package sample;
 
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.text.Font;
-
-import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-/**
- * Created by Inna on 17.04.2016.
- */
+
 public class Help {
 
     public Help() {

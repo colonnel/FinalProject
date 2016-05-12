@@ -18,8 +18,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -29,7 +35,7 @@ public class Main extends Application {
     GraphicsContext gc;
     Scene scene;
     ArrayList<Shape> list = new ArrayList<>();
-    private int counter = list.size() - 1;
+    private int counter = 0;
 
 
     private EventHandler<KeyEvent> keyboardListener = event -> {
@@ -219,9 +225,9 @@ public class Main extends Application {
     private GridPane createGrid() {
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(15, 15, 15, 15));
+        grid.setHgap(0);
+        grid.setVgap(0);
+        grid.setPadding(new Insets(0, 0, 0, 0));
         return grid;
     }
 
@@ -234,19 +240,24 @@ public class Main extends Application {
                 double clickY = event.getSceneY();
                 for (int i = 0; i < list.size(); i++) {
                     if (list.get(i).isTouched(clickX, clickY)) {
-                        Shape current = list.get(counter - 1);
                         Shape selected = list.get(i);
-                        if (current == selected) {
+
+                        if (group1.isExsist(selected)) {
                             return;
+                        } else if (list.size() > 1) {
+                            Shape penultimateShape = list.get(list.size() - 2);
+                            if (penultimateShape.equals(selected)){
+                                return;
+                            } else {
+                                group1.addToGroup(selected);
+                                group1.addToGroup(penultimateShape);
+                                list.remove(selected);
+                                list.remove(penultimateShape);
+                            }
                         }
-                        group1.addToGroup(current);
-                        group1.addToGroup(selected);
-                        list.remove(current);
-                        list.remove(selected);
                         list.add(group1);
                         counter = list.size() - 1;
                         drawAllShapesAfterAnyAction();
-
                     }
                 }
 
