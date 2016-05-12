@@ -18,14 +18,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.awt.*;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -35,7 +29,7 @@ public class Main extends Application {
     GraphicsContext gc;
     Scene scene;
     ArrayList<Shape> list = new ArrayList<>();
-    private int counter = 0;
+    private int counter = list.size() - 1;
 
 
     private EventHandler<KeyEvent> keyboardListener = event -> {
@@ -43,50 +37,35 @@ public class Main extends Application {
         //Add circle
         if (event.getCode() == KeyCode.DIGIT1) {
             list.add(new Circle(gc));
-            list.get(list.size() - 1).clear();
-            for (int i = 0; i < list.size(); i++) {
-                list.get(i).draw();
-            }
+            drawAllShapesAfterAnyAction();
             counter++;
         }
 
         //Add square
         if (event.getCode() == KeyCode.DIGIT2) {
             list.add(new Square(gc));
-            list.get(list.size() - 1).clear();
-            for (int i = 0; i < list.size(); i++) {
-                list.get(i).draw();
-            }
+            drawAllShapesAfterAnyAction();
             counter++;
         }
 
         //Add Triangle
         if (event.getCode() == KeyCode.DIGIT3) {
             list.add(new Triangle(gc));
-            list.get(list.size() - 1).clear();
-            for (int i = 0; i < list.size(); i++) {
-                list.get(i).draw();
-            }
+            drawAllShapesAfterAnyAction();
             counter++;
         }
 
         //Add oval
         if (event.getCode() == KeyCode.DIGIT4) {
             list.add(new Oval(gc));
-            list.get(list.size() - 1).clear();
-            for (int i = 0; i < list.size(); i++) {
-                list.get(i).draw();
-            }
+            drawAllShapesAfterAnyAction();
             counter++;
         }
 
         //Add rectangle
         if (event.getCode() == KeyCode.DIGIT5) {
             list.add(new Rectangle(gc));
-            list.get(list.size() - 1).clear();
-            for (int i = 0; i < list.size(); i++) {
-                list.get(i).draw();
-            }
+            drawAllShapesAfterAnyAction();
             counter++;
         }
 
@@ -111,7 +90,7 @@ public class Main extends Application {
             switch (randShape) {
                 case 1:
                     list.add(new Circle(gc));
-                    list.get(list.size() - 1).clear();
+                    list.get(counter).clear();
                     for (int i = 0; i < list.size(); i++) {
                         list.get(i).draw();
                     }
@@ -119,7 +98,7 @@ public class Main extends Application {
                     break;
                 case 2:
                     list.add(new Square(gc));
-                    list.get(list.size() - 1).clear();
+                    list.get(counter).clear();
                     for (int i = 0; i < list.size(); i++) {
                         list.get(i).draw();
                     }
@@ -127,7 +106,7 @@ public class Main extends Application {
                     break;
                 case 3:
                     list.add(new Triangle(gc));
-                    list.get(list.size() - 1).clear();
+                    list.get(counter).clear();
                     for (int i = 0; i < list.size(); i++) {
                         list.get(i).draw();
                     }
@@ -135,7 +114,7 @@ public class Main extends Application {
                     break;
                 case 4:
                     list.add(new Oval(gc));
-                    list.get(list.size() - 1).clear();
+                    list.get(counter).clear();
                     for (int i = 0; i < list.size(); i++) {
                         list.get(i).draw();
                     }
@@ -143,7 +122,7 @@ public class Main extends Application {
                     break;
                 case 5:
                     list.add(new Rectangle(gc));
-                    list.get(list.size() - 1).clear();
+                    list.get(counter).clear();
                     for (int i = 0; i < list.size(); i++) {
                         list.get(i).draw();
                     }
@@ -202,7 +181,8 @@ public class Main extends Application {
         group.setCenter(canvas);
         primaryStage.show();
         setOnKeyPressed();
-
+        setOnMousePressed();
+        setOnKeyPressed();
     }
 
     private void addButton(GridPane grid) {
@@ -252,54 +232,56 @@ public class Main extends Application {
                 Group group1 = new Group(gc);
                 double clickX = event.getSceneX();
                 double clickY = event.getSceneY();
-                for (int i = 0; i <list.size() ; i++) {
-                    if (list.get(i).isTouched(clickX, clickY)){
-                        Shape current = list.get(counter-1);
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).isTouched(clickX, clickY)) {
+                        Shape current = list.get(counter - 1);
                         Shape selected = list.get(i);
-                        if (current == selected){
+                        if (current == selected) {
                             return;
                         }
                         group1.addToGroup(current);
                         group1.addToGroup(selected);
-                        group1.draw();
                         list.remove(current);
                         list.remove(selected);
+                        list.add(group1);
+                        counter = list.size() - 1;
+                        drawAllShapesAfterAnyAction();
+
                     }
                 }
-                list.add(group1);
-                counter = list.size() -1;
+
 
             }
         });
     }
 
-//    private void setOnMousePressed() {
-//        scene.setOnMousePressed(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//                Group group1 = new Group(gc);
-//                double clickX = event.getSceneX();
-//                double clickY = event.getSceneY();
-//                for (int i = 0; i < list.size(); i++) {
-//                    if (list.get(i).isTouched(clickX, clickY)) {
-//
-//                        Shape current = list.get(counter-1);
-//                        Shape selected = list.get(i);
-//                        if (current == selected) {
-//                            return;
-//                        }
-//                        group1.addToGroup(current);
-//                        group1.addToGroup(selected);
-//                        group1.draw();
-//                        list.remove(current);
-//                        list.remove(selected);
-//                    }
-//                }
-//                list.add(group1);
-//                counter = list.size() - 1;
-//            }
-//        });
-//    }
+    /**
+     * Method clean Canvas
+     */
+
+    public void cleanCanvas() {
+        gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
+    }
+
+    /**
+     * Method clean canvas and list
+     */
+    private void actionCanvas() {
+        list.clear();
+        gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
+    }
+
+
+    /**
+     * Method draws all shapes after any action
+     */
+    private void drawAllShapesAfterAnyAction() {
+        cleanCanvas();
+        for (int i = 0; i < list.size(); i++) {
+            list.get(i).draw();
+        }
+    }
+
 
     public void setOnKeyPressed() {
         scene.setOnKeyPressed(keyboardListener);
