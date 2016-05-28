@@ -15,11 +15,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Main extends Application {
-//    private static int CANVAS_X = 1000;
+    //    private static int CANVAS_X = 1000;
 //    private static int CANVAS_Y = 600;
     GraphicsContext gc;
     Scene scene;
