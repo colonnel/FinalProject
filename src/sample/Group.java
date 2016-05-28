@@ -4,17 +4,17 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 
 public class Group extends Shape {
-    List<Shape> list = new ArrayList<>();
+    ArrayList<Shape> list;
     private Color colorForGroup;
 
     public Group(GraphicsContext gc) {
         super(gc);
         colorForGroup = generateColorForGroup();
+        list = new ArrayList<>();
     }
 
     @Override
@@ -73,7 +73,7 @@ public class Group extends Shape {
 
     }
 
-    public boolean isExsist(Shape s) {
+    public boolean isExist(Shape s) {
         return list.contains(s);
     }
 }

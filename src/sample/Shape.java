@@ -9,16 +9,13 @@ import java.util.Random;
 public abstract class Shape {
     private GraphicsContext gc;
     Random random = new Random();
-    private static int size = 50;
     private double x;
     private double y;
-    private int step = 5;
 
     public Shape(GraphicsContext gc) {
         this.gc = gc;
         x = random.nextInt((int) (getGc().getCanvas().getWidth()));
         y = random.nextInt((int) getGc().getCanvas().getHeight());
-
     }
 
 
@@ -26,56 +23,53 @@ public abstract class Shape {
         return gc;
     }
 
-
+    /**
+     * Method moves shape up
+     */
     public void moveUp() {
         if (y > 0) {
-            y -= step;
+            y -= Const.STEP;
         }
     }
 
-
+    /**
+     * Method moves shape down
+     */
     public void moveDown() {
-        if (y < gc.getCanvas().getHeight() - size) {
-            y += step;
+        if (y < gc.getCanvas().getHeight() - Const.SIZE) {
+            y += Const.STEP;
         }
     }
 
+    /**
+     * Method moves shape right
+     */
     public void moveRight() {
-        if (x < gc.getCanvas().getWidth() - size) {
-            x += step;
+        if (x < gc.getCanvas().getWidth() - Const.SIZE) {
+            x += Const.STEP;
         }
     }
 
+    /**
+     * Method moves shape left
+     */
     public void moveLeft() {
         if (x > 0) {
-            x -= step;
+            x -= Const.STEP;
         }
     }
 
-
-    public void clear() {
-        gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
-    }
-
-    public abstract void draw();
-
+    /**
+     * Method gets coordinates for x
+     */
     public double getX() {
-        if (x <= 0) {
-            return (size / 2);
-        }
-        if (x >= getGc().getCanvas().getWidth()) {
-            return (getGc().getCanvas().getWidth() - size * 2);
-        }
         return x;
     }
 
+    /**
+     * Method gets coordinates for y
+     */
     public double getY() {
-        if (y <= 0) {
-            return (size / 2);
-        }
-        if (y >= getGc().getCanvas().getHeight()) {
-            return (getGc().getCanvas().getHeight() - size * 2);
-        }
         return y;
     }
 
@@ -83,5 +77,6 @@ public abstract class Shape {
 
     public abstract boolean isTouched(double clickX, double clickY);
 
+    public abstract void draw();
 
 }
